@@ -25,24 +25,24 @@ router.use(auth)
 router.use('/movies', moviesRouter);
 router.use('/users', usersRouter);
 
-// router.get('/', (req, res, next) => {
-//   if (req) throw new NotFoundError('Запрашиваемый ресурс не найден');
-//   next();
-// });
-//
-// router.post('/', (req, res, next) => {
-//   if (req) throw new NotFoundError('Запрашиваемый ресурс не найден');
-//   next();
-// });
-//
-// router.get('/:path', (req, res, next) => {
-//   if (req.params.path) throw new NotFoundError('Запрашиваемый ресурс не найден');
-//   next();
-// });
-//
-// router.post('/:path', (req, res, next) => {
-//   if (req.params.path) throw new NotFoundError('Запрашиваемый ресурс не найден');
-//   next();
-// });
+router.get('/', (req, res, next) => {
+  if (req) throw new NotFoundError('Запрашиваемый ресурс не найден');
+  next();
+});
+
+router.post('/', (req, res, next) => {
+  if (req) throw new NotFoundError('Запрашиваемый ресурс не найден');
+  next();
+});
+
+router.get('/:path', (req, res, next) => {
+  if (req.params.path) throw new NotFoundError('Запрашиваемый ресурс не найден');
+  next();
+});
+
+router.post('/:path', (req, res, next) => {
+  if (req.params.path) throw new NotFoundError('Запрашиваемый ресурс не найден');
+  next();
+});
 
 module.exports = router

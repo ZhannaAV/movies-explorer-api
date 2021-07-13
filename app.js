@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
+const routes = require('./routes/index')
 const { celebrate, Joi, errors } = require('celebrate');
 const cors = require('cors');
 const usersRouter = require('./routes/users');
@@ -37,43 +38,45 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
-app.post('/signup', celebrate({
-  body: Joi.object().keys({
-    name: Joi.string().min(2).max(30),
-    email: Joi.string().required().pattern(new RegExp('^[a-z0-9-_.]{1,20}@[a-z0-9-_.]{1,20}\\.[a-z]{2,5}$')),
-    password: Joi.string().required(),
-  }),
-}), createUser);
+app.use(routes)
+//
+// app.post('/signup', celebrate({
+//   body: Joi.object().keys({
+//     name: Joi.string().min(2).max(30),
+//     email: Joi.string().required().pattern(new RegExp('^[a-z0-9-_.]{1,20}@[a-z0-9-_.]{1,20}\\.[a-z]{2,5}$')),
+//     password: Joi.string().required(),
+//   }),
+// }), createUser);
+//
+// app.post('/signin', celebrate({
+//   body: Joi.object().keys({
+//     email: Joi.string().required().pattern(new RegExp('^[a-z0-9-_.]{1,20}@[a-z0-9-_.]{1,20}\\.[a-z]{2,5}$')),
+//     password: Joi.string().required(),
+//   }),
+// }), login);
+//
+// app.use('/movies', auth, moviesRouter);
+// app.use('/users', auth, usersRouter);
 
-app.post('/signin', celebrate({
-  body: Joi.object().keys({
-    email: Joi.string().required().pattern(new RegExp('^[a-z0-9-_.]{1,20}@[a-z0-9-_.]{1,20}\\.[a-z]{2,5}$')),
-    password: Joi.string().required(),
-  }),
-}), login);
-
-app.use('/movies', auth, moviesRouter);
-app.use('/users', auth, usersRouter);
-
-app.get('/', (req, res, next) => {
-  if (req) throw new NotFoundError('Запрашиваемый ресурс не найден');
-  next();
-});
-
-app.post('/', (req, res, next) => {
-  if (req) throw new NotFoundError('Запрашиваемый ресурс не найден');
-  next();
-});
-
-app.get('/:path', (req, res, next) => {
-  if (req.params.path) throw new NotFoundError('Запрашиваемый ресурс не найден');
-  next();
-});
-
-app.post('/:path', (req, res, next) => {
-  if (req.params.path) throw new NotFoundError('Запрашиваемый ресурс не найден');
-  next();
-});
+// app.get('/', (req, res, next) => {
+//   if (req) throw new NotFoundError('Запрашиваемый ресурс не найден');
+//   next();
+// });
+//
+// app.post('/', (req, res, next) => {
+//   if (req) throw new NotFoundError('Запрашиваемый ресурс не найден');
+//   next();
+// });
+//
+// app.get('/:path', (req, res, next) => {
+//   if (req.params.path) throw new NotFoundError('Запрашиваемый ресурс не найден');
+//   next();
+// });
+//
+// app.post('/:path', (req, res, next) => {
+//   if (req.params.path) throw new NotFoundError('Запрашиваемый ресурс не найден');
+//   next();
+// });
 
 app.use(errorLogger);
 

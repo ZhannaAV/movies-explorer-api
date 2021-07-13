@@ -36,7 +36,7 @@ module.exports.changeUser = (req, res, next) => {
       if(user) {
         new DuplicateEmailError('Пользователь с таким email уже существует')
       } else {
-        User.findByIdAndUpdate(id, { name, email }, { new: true, runValidators: true })
+       return User.findByIdAndUpdate(id, { name, email }, { new: true, runValidators: true })
           .orFail(() => new NotFoundError('Пользователь не найден'))
           .then((user) => res.status(200).send(user))
       }
