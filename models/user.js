@@ -8,7 +8,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     minlength: 2,
     maxlength: 30,
-    default: 'Новый пользователь',
   },
   email: {
     type: String,
@@ -18,12 +17,12 @@ const userSchema = new mongoose.Schema({
       },
       message: 'Укажите почту в формате name@email.domen',
     },
-    required: true,
+    required: [true, 'Поле "email" должно быть заполнено'],
     unique: true,
   },
   password: {
     type: String,
-    required: true,
+    required: [true, 'Поле "password" должно быть заполнено'],
     select: false,
   },
 });

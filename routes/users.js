@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const {celebrate, Joi} = require('celebrate');
+const {validateUserChange} = require('../middlewares/validations');
 
 const {
   changeUser, getMe,
@@ -7,13 +7,6 @@ const {
 
 router.get('/me', getMe);
 
-router.patch('/me', celebrate({
-  body: Joi.object().keys({
-    name: Joi.string().min(2).max(30),
-    email: Joi.string().required().pattern(new RegExp('^[a-z0-9-_.]{1,20}@[a-z0-9-_.]{1,20}\\.[a-z]{2,5}$')),
-  }),
-}), changeUser);
-
-
+router.patch('/me', validateUserChange, changeUser);
 
 module.exports = router;
