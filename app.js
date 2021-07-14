@@ -8,10 +8,10 @@ const cors = require('cors');
 const errorHandler = require('./middlewares/err');
 const corsOption = require('./middlewares/corsOption');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const NotFoundError = require('./errors/NotFoundError');
 require('dotenv').config();
-const NotFoundError = require('./errors/NotFoundError')
 
-const { PORT = 3000, MONGO_URL = 'mongodb://localhost:27017/bitfilmsdb' } = process.env;
+const { PORT = 3000, MONGO_URL = 'mongodb://localhost:27017/bitfilmsdb'} = process.env;
 const app = express();
 mongoose.connect(MONGO_URL, {
   useNewUrlParser: true,
