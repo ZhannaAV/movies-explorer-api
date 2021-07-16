@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const {validateUserChange} = require('../middlewares/validations');
+const { validateUserChange } = require('../middlewares/validations');
 
 const {
   changeUser, getMe,

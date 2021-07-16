@@ -9,7 +9,19 @@ module.exports.getMovies = (req, res, next) => {
 };
 
 module.exports.addMovie = (req, res, next) => {
-  const {country, director, duration, year, description, image, trailer, thumbnail, movieId, nameRU, nameEN} = req.body;
+  const {
+    country,
+    director,
+    duration,
+    year,
+    description,
+    image,
+    trailer,
+    thumbnail,
+    movieId,
+    nameRU,
+    nameEN,
+  } = req.body;
   const userId = req.user._id;
   Movie.create({
     country,
@@ -23,14 +35,14 @@ module.exports.addMovie = (req, res, next) => {
     movieId,
     nameRU,
     nameEN,
-    owner: userId
+    owner: userId,
   })
     .then((movie) => res.status(200).send(movie))
     .catch(next);
 };
 
 module.exports.deleteMovie = (req, res, next) => {
-  const {movieId} = req.params;
+  const { movieId } = req.params;
   const userId = req.user._id;
   Movie.findById(movieId)
     .orFail(() => new NotFoundError('Карточка фильма не найдена'))
@@ -41,6 +53,6 @@ module.exports.deleteMovie = (req, res, next) => {
       return movie._id;
     })
     .then((id) => Movie.findByIdAndRemove(id)
-      .then(() => res.status(200).send({message: 'Карточка фильма удалена'})))
+      .then(() => res.status(200).send({ message: 'Карточка фильма удалена' })))
     .catch(next);
 };

@@ -31,14 +31,14 @@ module.exports.createUser = (req, res, next) => {
 module.exports.changeUser = (req, res, next) => {
   const id = req.user._id;
   const { name, email } = req.body;
-  User.findOne({email})
+  User.findOne({ email })
     .then((user) => {
-      if(user) {
-        new DuplicateEmailError('Пользователь с таким email уже существует')
+      if (user) {
+        throw new DuplicateEmailError('Пользователь с таким email уже существует');
       } else {
-       return User.findByIdAndUpdate(id, { name, email }, { new: true, runValidators: true })
+        return User.findByIdAndUpdate(id, { name, email }, { new: true, runValidators: true })
           .orFail(() => new NotFoundError('Пользователь не найден'))
-          .then((user) => res.status(200).send(user))
+          .then((user) => res.status(200).send(user));
       }
     })
     .catch(next);
