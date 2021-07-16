@@ -49,7 +49,7 @@ const validateMovieBody = celebrate({
     image: Joi.string().required().custom(methodUrl),
     trailer: Joi.string().required().custom(methodUrl),
     thumbnail: Joi.string().required().custom(methodUrl),
-    movieId: Joi.number().required(),
+    movieId: Joi.string().length(24).hex().required(),
     nameRU: Joi.string().required().pattern(new RegExp(/^[a-яёА-ЯЁ1-9 !?,-]+$/)),
     nameEN: Joi.string().required().pattern(new RegExp(/^[a-zA-Z1-9 !?,-]+$/)),
   }),

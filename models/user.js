@@ -35,6 +35,6 @@ userSchema.statics.findUserByEmail = function (email, password) {
         if (!matched) throw new LoginError('Неправильные почта или пароль');
         return user;
       }));
-}
+};
 
 module.exports = mongoose.model('user', userSchema);
