@@ -9,25 +9,17 @@ const methodUrl = (value) => {
   throw new Error('URL validation err');
 };
 
-const methodEmail = (value) => {
-  const result = validator.isEmail(value);
-  if (result) {
-    return value;
-  }
-  throw new Error('Email validation err');
-};
-
 const validateUserBody = celebrate({
   body: Joi.object().keys({
     name: Joi.string().min(2).max(30),
-    email: Joi.string().required().custom(methodEmail),
+    email: Joi.string().email().required(),
     password: Joi.string().required(),
   }),
 });
 
 const validateAuth = celebrate({
   body: Joi.object().keys({
-    email: Joi.string().required().custom(methodEmail),
+    email: Joi.string().email().required(),
     password: Joi.string().required(),
   }),
 });
@@ -35,7 +27,7 @@ const validateAuth = celebrate({
 const validateUserChange = celebrate({
   body: Joi.object().keys({
     name: Joi.string().min(2).max(30).required(),
-    email: Joi.string().required().custom(methodEmail),
+    email: Joi.string().email().required(),
   }),
 });
 
@@ -49,7 +41,7 @@ const validateMovieBody = celebrate({
     image: Joi.string().required().custom(methodUrl),
     trailer: Joi.string().required().custom(methodUrl),
     thumbnail: Joi.string().required().custom(methodUrl),
-    movieId: Joi.string().length(24).hex().required(),
+    movieId: Joi.number().required(),
     nameRU: Joi.string().required().pattern(new RegExp(/^[a-яёА-ЯЁ1-9 !?,-]+$/)),
     nameEN: Joi.string().required().pattern(new RegExp(/^[a-zA-Z1-9 !?,-]+$/)),
   }),
