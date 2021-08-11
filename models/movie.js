@@ -44,22 +44,10 @@ const movieSchema = new mongoose.Schema({
   },
   nameRU: {
     type: String,
-    validate: {
-      validator(v) {
-        return /^[a-яёА-ЯЁ1-9 !?,-]+$/.test(v);
-      },
-      message: 'Ожидаются символы кириллицы',
-    },
     required: [true, 'Поле "nameRU" должно быть заполнено'],
   },
   nameEN: {
     type: String,
-    validate: {
-      validator(v) {
-        return /^[a-zA-Z1-9 !?,-]+$/.test(v);
-      },
-      message: 'Ожидаются символы латиницы',
-    },
     required: [true, 'Поле "nameEN" должно быть заполнено'],
   },
 
