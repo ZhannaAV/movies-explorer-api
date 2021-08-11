@@ -23,32 +23,14 @@ const movieSchema = new mongoose.Schema({
   },
   image: {
     type: String,
-    validate: {
-      validator(v) {
-        return /^(http|https):\/\/[A-za-z0-9-._~:/?#\]@!$&'()*+,;=]{1,}\.(jpg|png|svg)$/.test(v);
-      },
-      message: 'Ожидается валидный url-адрес',
-    },
     required: [true, 'Поле "image" должно быть заполнено'],
   },
   trailer: {
     type: String,
-    validate: {
-      validator(v) {
-        return /^(http|https):\/\/[A-za-z0-9-._~:/?#\]@!$&'()*+,;=]{1,}\.(avi)$/.test(v);
-      },
-      message: 'Ожидается валидный url-адрес',
-    },
     required: [true, 'Поле "trailer" должно быть заполнено'],
   },
   thumbnail: {
     type: String,
-    validate: {
-      validator(v) {
-        return /^(http|https):\/\/[A-za-z0-9-._~:/?#\]@!$&'()*+,;=]{1,}\.(jpg|png|svg)$/.test(v);
-      },
-      message: 'Ожидается валидный url-адрес',
-    },
     required: [true, 'Поле "thumbnail" должно быть заполнено'],
   },
   owner: {
