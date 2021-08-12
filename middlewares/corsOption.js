@@ -1,8 +1,8 @@
 const CORS_WHITELIST = [
   'http://localhost:3000',
   'http://localhost:8080',
-  'https://diploma.zhanna.nomoredomains.monster ',
-  'http://diploma.zhanna.nomoredomains.monster ',
+  'https://diploma.zhanna.nomoredomains.monster',
+  'http://diploma.zhanna.nomoredomains.monster',
 ];
 const corsOption = {
   credentials: true,
