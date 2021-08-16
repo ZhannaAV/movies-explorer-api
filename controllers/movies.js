@@ -3,8 +3,11 @@ const NotFoundError = require('../errors/NotFoundError');
 const NoRulesError = require('../errors/NoRulesError');
 
 module.exports.getMovies = (req, res, next) => {
+  const userId = req.user._id;
   Movie.find({})
-    .then((movies) => res.status(200).send(movies))
+    .then((movies) => {
+      res.status(200).send(movies.filter(movie => String(movie.owner) === userId))
+    })
     .catch(next);
 };
 
